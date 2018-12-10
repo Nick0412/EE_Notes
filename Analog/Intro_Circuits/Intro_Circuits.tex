@@ -1,0 +1,29 @@
+\subsection[Introduction to Circuits]{Introduction to \\ Circuits}
+
+\subsubsection{Basic Components}
+{\color[HTML]{156EC7}\fontsize{18}{22}\selectfont\bfseries Resistors}
+\vspace*{10pt} \\
+The resistor is one of the most fundamental building blocks of analog circuits.
+We denote a resistor with resistance $R$ as follows.
+\begin{figure}[H]\centering
+\begin{circuitikz}
+	\draw (0,0) to[R=$R$] (2,0);
+\end{circuitikz}
+\end{figure}
+Resistance has units of Ohms and the SI symbol for its units is $\Omega$.
+When studying resistors, we usually want to relate the voltage across the resistor's terminals to the current passing through it.
+The relationship is described by Ohm's Law.
+\begin{mdframed}[backgroundcolor=frameColor,linecolor=borderColor,linewidth=2pt,roundcorner=8pt,align=center]
+\textbf{Ohm's Law} relates the voltage $V$ and the current $I$ through a resistor with resistance $R$ by the equation.
+\[
+	V = IR
+\]
+Represented by the following schematic.
+\begin{figure}[H]\centering
+\begin{circuitikz}[american voltages]
+	\draw (0,0) to[R=$R$,f=$I$,v_>=$V$, o-o] (2,0);
+\end{circuitikz}
+\end{figure}
+\end{mdframed}
+Voltages has units of volts and its units are represented by $V$. 
+Current has units of Amperes and its units are represented by $A$.
