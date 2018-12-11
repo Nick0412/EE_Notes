@@ -1,8 +1,7 @@
 \subsection[Introduction to Circuits]{Introduction to \\ Circuits}
 
 \subsubsection{Basic Components}
-{\color[HTML]{156EC7}\fontsize{18}{22}\selectfont\bfseries Resistors}
-\vspace*{10pt} \\
+\stitle{Resistors}
 The resistor is one of the most fundamental building blocks of analog circuits.
 We denote a resistor with resistance $R$ as follows.
 \begin{figure}[H]\centering
@@ -27,3 +26,32 @@ Represented by the following schematic.
 \end{mdframed}
 Voltages has units of volts and its units are represented by $V$. 
 Current has units of Amperes and its units are represented by $A$.
+
+\stitle{Capacitors}
+A capacitor is typically a set of parallel plates that are separated by some insulating material such as air.
+We denote a capacitor with capacitance $C$ as follows.
+\begin{figure}[H]\centering
+\begin{circuitikz}
+	\draw (0,0) to[C=$C$] (2,0);
+\end{circuitikz}
+\end{figure}
+Capacitors work by storing some positive charge on one of the plates and negative charge on the opposite plate.
+This causes an electric field between the plates and this is where the capacitor stores its energy.
+We relate the capacitor's capacitance with its voltage as follows.
+\begin{mdframed}[backgroundcolor=frameColor,linecolor=borderColor,linewidth=2pt,roundcorner=8pt,align=center]
+Given the following capacitor with capacitance $C$ and charge $Q$ on one of the plates
+\begin{figure}[H]\centering
+\begin{circuitikz}[american voltages]
+	\draw 
+		(0,0) to node[above,pos=1,o-]{$+Q$} (.5,0)
+		to [C=$C$] (1.5,0) to node[above,pos=0]{$-Q$} (2,0)
+		(0,0) to [open,v_>=\raisebox{-.2in}{$V$},o-o] (2,0);
+\end{circuitikz}
+\end{figure}
+we relate the voltage $V$ across the capacitor with the equation.
+\[
+	V = \frac{Q}{C}
+\]
+\end{mdframed}
+
+
