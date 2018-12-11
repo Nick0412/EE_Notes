@@ -26,7 +26,7 @@
 \titleformat{\section}
 	{\fontsize{75}{90}\selectfont\bfseries}
 	% {\normalfont\Huge\bfseries} % format
-	{\llap{\hspace*{-.75in}\thesection\hfill}} % label
+	{\llap{\hspace*{-1in}\thesection\hspace*{.25in}}} % label
 	{0pt} % sep
 	{} % before code
 	[] % after code
@@ -35,14 +35,14 @@
 	{\fontsize{40}{48}\selectfont\bfseries}%
 	{} %
 	{0pt}%
-	{\llap{\hspace*{-1in}\thesubsection\hfill}}%
+	{\llap{\hspace*{-1in}\thesubsection\hspace*{.25in}}}%
 	[\vspace*{20pt}]%
 
 \titleformat{\subsubsection}
 	{\fontsize{20}{24}\selectfont\bfseries}%
 	{}%
 	{0pt}%
-	{\makebox[\linewidth][r]{\color[HTML]{156EC7}\rule{\mylength}{3pt}} \\ \llap{\hspace*{-1in}\thesubsubsection\hfill}}%
+	{\makebox[\linewidth][r]{\color[HTML]{156EC7}\rule{\mylength}{3pt}} \\ \llap{\hspace*{-1in}\thesubsubsection\hspace*{.25in}}}%
 	[] %
 
 

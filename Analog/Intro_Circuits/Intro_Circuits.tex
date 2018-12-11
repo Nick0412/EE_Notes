@@ -14,6 +14,7 @@ When studying resistors, we usually want to relate the voltage across the resist
 The relationship is described by Ohm's Law.
 \begin{mdframed}[backgroundcolor=frameColor,linecolor=borderColor,linewidth=2pt,roundcorner=8pt,align=center]
 \vspace*{5px}
+{\hspace{-1in} Definition  \hspace{.25in}} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \textbf{Ohm's Law} relates the voltage $V$ and the current $I$ through a resistor with resistance $R$ by the equation.
 \[
 	V = IR
@@ -68,7 +69,7 @@ Given a circuit with multiple resistors in series, and thus the same current pas
 	\draw (2,0) to[R=$R_2$] (4,0);
 	\draw (4,0) to[R=$R_3$] (6,0);
 	\node at (6.5,0) {\LARGE{$\ldots$}};
-	\draw (7,0) to[R=$R_i$] (9,0);
+	\draw (7,0) to[R=$R_n$] (9,0);
 	\node at (9.5,0) {\LARGE{$\ldots$}};
 \end{circuitikz}
 \end{figure}
@@ -84,6 +85,45 @@ where
 	R_{\textrm{equivalent}} = \sum_i R_i
 \]
 \end{mdframed}
+Another configuration that resistors can be in is in parallel. 
+Resistors that are in parallel share common voltages at both of their nodes and thus have the same voltage drops.
+An example of this kind of circuit is shown here.
+\begin{figure}[H]\centering
+\begin{circuitikz}
+	% \draw (0,0) to[open,o-o] (0,2);
+	\draw (0,2) node[left]{$+$} to[short,o-] (2,2);
+	\draw (0,0) node[left]{$-$} to[short,o-] (2,0);
+	\draw (2,0) to[R=$R_1$] (2,2);
+	\draw (2,2) to[short] (4,2);
+	\draw (2,0) to[short] (4,0);
+	\draw (4,0) to[R=$R_2$] (4,2);
+	\draw (4,2) to[short] (6,2);
+	\draw (4,0) to[short] (6,0);
+	\draw (6,0) to[R=$R_3$] (6,2);
+	\draw (6,2) to[short,-o] (8,2);
+	\draw (6,0) to[short,-o] (8,0);
+	\draw (0,0) to[open,v^<=$V$,xshift=-.1in] (0,2);
+	\node at (8,1) {\LARGE{$\ldots$}};
+\end{circuitikz}
+\end{figure}
+Here all the resistors have all their top nodes at the same voltage and all their bottom nodes at the same voltage, thus they are in parallel.
+As a cause of this, all the voltage drops are the same.
+Now the total current flowing from the top wire to the bottom wire is equivalent to the sum of all the current through each resistor. 
+\begin{gather*}
+	I_{\textrm{total}} = I_1 + I_2 + I_3 \\
+	\textrm{where,} \quad I_i = \frac{V}{R_i}
+\end{gather*}
+So now lets substitute and simplify.
+\begin{align*}
+	I_{\textrm{total}} &= I_1 + I_2 + I_3 \\
+	&= \left(\frac{V}{R_1}\right)+\left(\frac{V}{R_2}\right)+\left(\frac{V}{R_3}\right) \\
+	&= V\left(\frac{1}{R_1}+\frac{1}{R_2}+\frac{1}{R_3}\right) \\
+	&= V\left(\frac{1}{R_{\textrm{equivalent}}}\right)
+\end{align*}
+where 
+\[
+	\frac{1}{R_{\textrm{equivalent}}} = \frac{1}{R_1}+\frac{1}{R_2}+\frac{1}{R_3}
+\]
 
 \stitle{Capacitors}
 A capacitor is typically a set of parallel plates that are separated by some insulating material such as air.
