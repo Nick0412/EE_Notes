@@ -21,7 +21,7 @@
 \setlength{\mylength}{\textwidth}
 \addtolength{\mylength}{1in}
 
-\newcommand{\stitle}[1]{{\vspace*{10pt} \color[HTML]{156EC7}\fontsize{18}{22}\selectfont\bfseries #1 \vspace*{10pt} \\}}
+\newcommand{\stitle}[1]{{\vspace*{10pt} \color[HTML]{156EC7}\fontsize{18}{22}\selectfont\bfseries #1 \vspace*{10pt} }\\}
 
 \titleformat{\section}
 	{\fontsize{75}{90}\selectfont\bfseries}

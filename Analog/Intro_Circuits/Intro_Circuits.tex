@@ -13,19 +13,77 @@ Resistance has units of Ohms and the SI symbol for its units is $\Omega$.
 When studying resistors, we usually want to relate the voltage across the resistor's terminals to the current passing through it.
 The relationship is described by Ohm's Law.
 \begin{mdframed}[backgroundcolor=frameColor,linecolor=borderColor,linewidth=2pt,roundcorner=8pt,align=center]
+\vspace*{5px}
 \textbf{Ohm's Law} relates the voltage $V$ and the current $I$ through a resistor with resistance $R$ by the equation.
 \[
 	V = IR
 \]
 Represented by the following schematic.
 \begin{figure}[H]\centering
-\begin{circuitikz}[american voltages]
-	\draw (0,0) to[R=$R$,f=$I$,v_>=$V$, o-o] (2,0);
+\begin{circuitikz}[european voltages]
+	\draw (0,0) to[R=$R$,f=$I$, o-o] (2,0);
+	\draw (0,0) node[below]{$+$} to[open,v_>=$V$,yshift=-.1in] (2,0) node[below]{$-$};
 \end{circuitikz}
 \end{figure}
 \end{mdframed}
 Voltages has units of volts and its units are represented by $V$. 
 Current has units of Amperes and its units are represented by $A$.
+
+The next question to ask is what happens when we combine these resistors in different ways.
+When reducing circuits with multiple resistors, we usually think of them as being in series or parallel.
+A circuit with resistors in series is defined as a circuit branch that has the same current. 
+An example of this is shown here.
+\begin{figure}[H]\centering
+\begin{circuitikz}[european voltages]
+	\node at (-.5,0) {\LARGE{$\ldots$}};
+	\draw (0,0) to[R=$R_1$] (2,0);
+	\draw (2,0) to[R=$R_2$,f>_=$I$] (4,0);
+	\draw (4,0) to[R=$R_3$] (6,0);
+	\draw (0,0) node[below]{$+$} to [open,v_>={$V_{total}$},yshift=-.2in] (6,0) node[below]{$-$};
+	\node at (6.5,0) {\LARGE{$\ldots$}};
+\end{circuitikz}
+\end{figure}
+This circuit is in series and thus the same current $I$, passes through each of the resistors. 
+$V_{total}$ is the total voltage drop over all the resistors, which is the sum of all the voltage drops over each resistor.
+\[
+	V_{\textrm{total}} = V_1 + V_2 + V_3
+\]
+where $V_1$ is the voltage drop over resistor 1 and so on.
+But if we recall Ohm's Law, we remember that the voltage drop over each resistor is $V_i = IR_i$.
+So if substitute and simplify we get
+\begin{align*}
+	V_{\textrm{total}} &= V_1 + V_2 + V_3 \\
+	&= (IR_1) + (IR_2) + (IR_3) \\
+	&= I(R_1+R_2+R_3) \\
+	&= I(R_{\textrm{equivalent}})
+\end{align*}
+where $R_{\textrm{equivalent}}$ is the sum of all the resistors.
+\begin{mdframed}[backgroundcolor=frameColor,linecolor=borderColor,linewidth=2pt,roundcorner=8pt,align=center]
+\vspace*{5px}
+Given a circuit with multiple resistors in series, and thus the same current passing through each, the following two circuits are equivalent.
+\begin{figure}[H]\centering
+\begin{circuitikz}[european voltages]
+	\node at (-.5,0) {\LARGE{$\ldots$}};
+	\draw (0,0) to[R=$R_1$] (2,0);
+	\draw (2,0) to[R=$R_2$] (4,0);
+	\draw (4,0) to[R=$R_3$] (6,0);
+	\node at (6.5,0) {\LARGE{$\ldots$}};
+	\draw (7,0) to[R=$R_i$] (9,0);
+	\node at (9.5,0) {\LARGE{$\ldots$}};
+\end{circuitikz}
+\end{figure}
+\begin{figure}[H]\centering
+\begin{circuitikz}[european voltages]
+	\node at (-.5,0) {\LARGE{$\ldots$}};
+	\draw (0,0) to[R=$R_{\textrm{equivalent}}$] (2,0);
+	\node at (2.5,0) {\LARGE{$\ldots$}};
+\end{circuitikz}
+\end{figure}
+where 
+\[
+	R_{\textrm{equivalent}} = \sum_i R_i
+\]
+\end{mdframed}
 
 \stitle{Capacitors}
 A capacitor is typically a set of parallel plates that are separated by some insulating material such as air.
@@ -35,17 +93,21 @@ We denote a capacitor with capacitance $C$ as follows.
 	\draw (0,0) to[C=$C$] (2,0);
 \end{circuitikz}
 \end{figure}
+Capacitance is measured in units of Farads and its units are represented by $F$.
 Capacitors work by storing some positive charge on one of the plates and negative charge on the opposite plate.
 This causes an electric field between the plates and this is where the capacitor stores its energy.
 We relate the capacitor's capacitance with its voltage as follows.
 \begin{mdframed}[backgroundcolor=frameColor,linecolor=borderColor,linewidth=2pt,roundcorner=8pt,align=center]
+\vspace*{5px}
 Given the following capacitor with capacitance $C$ and charge $Q$ on one of the plates
 \begin{figure}[H]\centering
-\begin{circuitikz}[american voltages]
+\begin{circuitikz}[european voltages]
 	\draw 
-		(0,0) to node[above,pos=1,o-]{$+Q$} (.5,0)
+		(0,0) to node[above,pos=1,]{$+Q$} (.5,0)
 		to [C=$C$] (1.5,0) to node[above,pos=0]{$-Q$} (2,0)
-		(0,0) to [open,v_>=\raisebox{-.2in}{$V$},o-o] (2,0);
+		% (0,0) to [open,v_>=\raisebox{-.2in}{$V$},o-o] (2,0);
+		(0,0) to [open,v_>={$V$},yshift=-.1in] (2,0);
+	\draw (0,0) node[below]{$+$} to [open,o-o] (2,0) node[below]{$-$};
 \end{circuitikz}
 \end{figure}
 we relate the voltage $V$ across the capacitor with the equation.
