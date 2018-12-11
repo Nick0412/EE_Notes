@@ -30,8 +30,8 @@ Represented by the following schematic.
 \end{circuitikz}
 \end{figure}
 \end{mdframed}
-Voltages has units of volts and its units are represented by $V$. 
-Current has units of Amperes and its units are represented by $A$.
+Voltages has units of volts and its units are represented by $[V]$. 
+Current has units of Amperes and its units are represented by $[A]$.
 
 The next question to ask is what happens when we combine these resistors in different ways.
 When reducing circuits with multiple resistors, we usually think of them as being in series or parallel.
@@ -178,7 +178,7 @@ We denote a capacitor with capacitance $C$ as follows.
 	\draw (0,0) to[C=$C$] (2,0);
 \end{circuitikz}
 \end{figure}
-Capacitance is measured in units of Farads and its units are represented by $F$.
+Capacitance is measured in units of Farads and its units are represented by $[F]$.
 Capacitors work by storing some positive charge on one of the plates and negative charge on the opposite plate.
 This causes an electric field between the plates and this is where the capacitor stores its energy.
 We relate the capacitor's capacitance with its voltage as follows.
@@ -199,8 +199,82 @@ we relate the voltage $V$ across the capacitor with the equation.
 \[
 	V = \frac{Q}{C}
 \]
-Similar to resistors, we can combine capacitors in series and parallel. 
-Lets understand
 \end{mdframed}
+Charge has units of Coulombs and its units are represented as $[C]$ usually.
+Similar to resistors, we can combine capacitors in series and parallel. 
+An example of circuit with capacitors in series.
+\begin{figure}[H]\centering
+\begin{circuitikz}[european voltages]
+	\draw (0,0) to [C=$C_1$] (2,0);
+	\draw (2,0) to [C=$C_2$] (4,0);
+	\draw (4,0) to [C=$C_3$] (6,0);
+	\node at (6.5,0) {\LARGE{$\ldots$}};
+	\node at (-.5,0) {\LARGE{$\ldots$}};
+	\node at (.5,0)[above]{$+Q$};
+	\node at (2.5,0)[above]{$+Q$};
+	\node at (4.5,0)[above]{$+Q$};
+	\node at (1.5,0)[above]{$-Q$};
+	\node at (3.5,0)[above]{$-Q$};
+	\node at (5.5,0)[above]{$-Q$};
+	\draw (0,0) node[below]{$+$} to [open,o-o] (6,0) node[below]{$-$};
+	\draw (0,0) to [open,v_>={$V$},yshift=-.2in] (6,0);
+\end{circuitikz}
+\end{figure}
+Here the important thing to recognize is that the charge on each of the capacitors is the same.
+If the charge was different between two capacitors, then there would be a voltage difference and current would flow to equalize voltages until all capacitors have the same charge.
+With that in mind lets try solving this circuit and finding an equivalent single capacitor to represent the circuit above.
+The total voltage drop over all three capacitors is simply the sum of each individual capacitor's voltage drop.
+\[
+	V = V_1 + V_2 + V_3
+\]
+But we know how to represent the voltage drop of a capacitor. Therefore we have.
+\begin{align*}
+	V &= V_1 + V_2 + V_3 \\
+	&= \left(\frac{Q}{C_1}\right)+\left(\frac{Q}{C_2}\right)+\left(\frac{Q}{C_3}\right) \\
+	&= Q\left(\frac{1}{C_1}+\frac{1}{C_2}+\frac{1}{C_3}\right) \\
+	&= Q\left(\frac{1}{C_{\textrm{equivalent}}}\right)
+\end{align*}
+where 
+\[
+	\frac{1}{C_{\textrm{equivalent}}} = \frac{1}{C_1}+\frac{1}{C_2}+\frac{1}{C_3}
+\]
+\begin{mdframed}[backgroundcolor=frameColor,linecolor=borderColor,linewidth=2pt,roundcorner=8pt,align=center]
+\vspace*{5px}
+For a circuit with multiple capacitors in series, and thus the same charge on each capacitor, then the following two circuits are equivalent.
+\begin{figure}[H]\centering
+\begin{circuitikz}[european voltages]
+	\draw (0,0) to [C=$C_1$] (2,0);
+	\draw (2,0) to [C=$C_2$] (4,0);
+	\draw (4,0) to [C=$C_3$] (6,0);
+	\node at (6.5,0) {\LARGE{$\ldots$}};
+	\node at (-.5,0) {\LARGE{$\ldots$}};
+	\draw (7,0) to [C=$C_n$] (9,0);
+	\node at (9.5,0) {\LARGE{$\ldots$}};
+\end{circuitikz}
+\end{figure}
+\begin{figure}[H]\centering
+\begin{circuitikz}[european voltages]
+	\node at (-.5,0) {\LARGE{$\ldots$}};
+	\draw (0,0) to [C=$C_{\textrm{equivalent}}$] (2,0);
+	\node at (2.5,0) {\LARGE{$\ldots$}};
+\end{circuitikz}
+\end{figure}
+where
+\[
+	\frac{1}{C_{\textrm{equivalent}}} = \mathlarger{{\mathlarger{\sum_i}}} \frac{1}{C_i}
+\]
+\end{mdframed}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
