@@ -169,7 +169,7 @@ where
 \]
 \end{mdframed}
 
-%%%% Capacitors
+%%%%%%%%%%%%%%%% Capacitors %%%%%%%%%%%%%%%%
 \stitle{Capacitors}
 A capacitor is typically a set of parallel plates that are separated by some insulating material such as air.
 We denote a capacitor with capacitance $C$ as follows.
@@ -202,7 +202,7 @@ we relate the voltage $V$ across the capacitor with the equation.
 \end{mdframed}
 Charge has units of Coulombs and its units are represented as $[C]$ usually.
 Similar to resistors, we can combine capacitors in series and parallel. 
-An example of circuit with capacitors in series.
+An example circuit with capacitors in series.
 \begin{figure}[H]\centering
 \begin{circuitikz}[european voltages]
 	\draw (0,0) to [C=$C_1$] (2,0);
@@ -217,19 +217,19 @@ An example of circuit with capacitors in series.
 	\node at (3.5,0)[above]{$-Q$};
 	\node at (5.5,0)[above]{$-Q$};
 	\draw (0,0) node[below]{$+$} to [open,o-o] (6,0) node[below]{$-$};
-	\draw (0,0) to [open,v_>={$V$},yshift=-.2in] (6,0);
+	\draw (0,0) to [open,v_>={$V_{\textrm{total}}$},yshift=-.2in] (6,0);
 \end{circuitikz}
 \end{figure}
 Here the important thing to recognize is that the charge on each of the capacitors is the same.
 If the charge was different between two capacitors, then there would be a voltage difference and current would flow to equalize voltages until all capacitors have the same charge.
-With that in mind lets try solving this circuit and finding an equivalent single capacitor to represent the circuit above.
+With that in mind lets try solving this circuit and find an equivalent single capacitor to represent it.
 The total voltage drop over all three capacitors is simply the sum of each individual capacitor's voltage drop.
 \[
-	V = V_1 + V_2 + V_3
+	V_{\textrm{total}} = V_1 + V_2 + V_3
 \]
 But we know how to represent the voltage drop of a capacitor. Therefore we have.
 \begin{align*}
-	V &= V_1 + V_2 + V_3 \\
+	V_{\textrm{total}} &= V_1 + V_2 + V_3 \\
 	&= \left(\frac{Q}{C_1}\right)+\left(\frac{Q}{C_2}\right)+\left(\frac{Q}{C_3}\right) \\
 	&= Q\left(\frac{1}{C_1}+\frac{1}{C_2}+\frac{1}{C_3}\right) \\
 	&= Q\left(\frac{1}{C_{\textrm{equivalent}}}\right)
@@ -264,14 +264,94 @@ where
 	\frac{1}{C_{\textrm{equivalent}}} = \mathlarger{{\mathlarger{\sum_i}}} \frac{1}{C_i}
 \]
 \end{mdframed}
+Capacitors can also be combined in a parallel fashion too.
+Here is an example circuit with capacitors in parallel.
+\begin{figure}[H]\centering
+\begin{circuitikz}
+	\draw (0,2) node[left]{$+$} to[short,o-] (2,2);
+	\draw (0,0) node[left]{$-$} to[short,o-] (2,0);
+	\draw (2,0) to[C=$C_1$] (2,2);
+	\draw (2,2) to[short] (4,2);
+	\draw (2,0) to[short] (4,0);
+	\draw (4,0) to[C=$C_2$] (4,2);
+	\draw (4,2) to[short] (6,2);
+	\draw (4,0) to[short] (6,0);
+	\draw (6,0) to[C=$C_3$] (6,2);
+	\draw (6,2) to[short,-o] (8,2);
+	\draw (6,0) to[short,-o] (8,0);
+	\draw (0,0) to[open,v^<=$V$,xshift=-.1in] (0,2);
+	\node at (8,1) {\LARGE{$\ldots$}};
+	\node at (2,1.5)[right,xshift=-.05in]{$+Q_1$};
+	\node at (2,.5)[right,xshift=-.05in]{$-Q_1$};
+	\node at (4,1.5)[right,xshift=-.05in]{$+Q_2$};
+	\node at (4,.5)[right,xshift=-.05in]{$-Q_2$};
+	\node at (6,1.5)[right,xshift=-.05in]{$+Q_3$};
+	\node at (6,.5)[right,xshift=-.05in]{$-Q_3$};
+\end{circuitikz}
+\end{figure}
+Again, to reinforce the idea, all the top nodes of the capacitors are at a common voltage and all the bottom ones are at a common voltage.
+Thus the voltage drop over each capacitor is the same.
+Now lets find an equivalent capacitor to represent this circuit.
+The total charge of all the capacitors is.
+\[
+	Q_{\textrm{total}} = Q_1 + Q_2 + Q_3
+\]
+Using our expression that relates charge and capacitance for capacitors we can substitute and simplify.
+\begin{align*}
+	Q_{\textrm{total}} &= Q_1 + Q_2 + Q_3 \\
+	&= (VC_1) + (VC_2) + (VC_3) \\
+	&= V(C_1+C_2+C_3) \\
+	&= V(C_{\textrm{equivalent}})
+\end{align*}
+where
+\[
+	C_{\textrm{equivalent}} = C_1+C_2+C_3
+\]
+\begin{mdframed}[backgroundcolor=frameColor,linecolor=borderColor,linewidth=2pt,roundcorner=8pt,align=center]
+\vspace*{5px}
+Given a circuit with capacitors in parallel, (i.e. corresponding nodes have same corresponding voltages and thus same voltage drops), then the following two circuits are equivalent.
+\begin{figure}[H]\centering
+\begin{circuitikz}
+	\node at (0,1) {\LARGE{$\ldots$}};
+	\draw (0,2) to[short,o-] (2,2);
+	\draw (0,0) to[short,o-] (2,0);
+	\draw (2,0) to[C=$C_1$] (2,2);
+	\draw (2,2) to[short] (4,2);
+	\draw (2,0) to[short] (4,0);
+	\draw (4,0) to[C=$C_2$] (4,2);
+	\draw (4,2) to[short] (6,2);
+	\draw (4,0) to[short] (6,0);
+	\draw (6,0) to[C=$C_3$] (6,2);
+	\draw (6,2) to[short] (8,2);
+	\draw (6,0) to[short] (8,0);
+	\node at (8,1) {\LARGE{$\ldots$}};
+	\draw (9,2) to[short] (10,2);
+	\draw (9,0) to[short] (10,0);
+	\draw (10,2) to[short,-o] (11,2);
+	\draw (10,0) to[short,-o] (11,0);
+	\draw (10,0) to[C=$C_n$] (10,2);
+	\node at (11,1) {\LARGE{$\ldots$}};
+\end{circuitikz}
+\end{figure}
+\begin{figure}[H]\centering
+\begin{circuitikz}
+	\node at (-.5,1) {\LARGE{$\ldots$}};
+	\draw (0,2) to[short,o-] (2,2);
+	\draw (0,0) to[short,o-] (2,0);
+	\draw (2,0) to[C=$C_{\textrm{equivalent}}$] (2,2);
+	\draw (2,2) to[short,-o] (4,2);
+	\draw (2,0) to[short,-o] (4,0);
+	\node at (4,1) {\LARGE{$\ldots$}};
+\end{circuitikz}
+\end{figure}
+where
+\[
+	C_{\textrm{equivalent}} = \mathlarger{{\mathlarger{\sum_i}}}C_i
+\]
+\end{mdframed}
 
-
-
-
-
-
-
-
+%%%%%%%%%%%%%%%% Inductors %%%%%%%%%%%%%%%%
+\stitle{Inductors}
 
 
 
