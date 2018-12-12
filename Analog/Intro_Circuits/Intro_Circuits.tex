@@ -170,6 +170,7 @@ where
 \end{mdframed}
 
 %%%%%%%%%%%%%%%% Capacitors %%%%%%%%%%%%%%%%
+\newpage
 \stitle{Capacitors}
 A capacitor is typically a set of parallel plates that are separated by some insulating material such as air.
 We denote a capacitor with capacitance $C$ as follows.
@@ -351,10 +352,173 @@ where
 \end{mdframed}
 
 %%%%%%%%%%%%%%%% Inductors %%%%%%%%%%%%%%%%
+\newpage
 \stitle{Inductors}
-
-
-
-
-
+The last of the basic components we must talk about is the inductor.
+Inductors are coils of metal that produce magnetic fields when current flows through them.
+We denote an inductor with inductance $L$ as follows.
+\begin{figure}[H]\centering
+\begin{circuitikz}
+	\draw (0,0) to[L=$L$] (2,0);
+\end{circuitikz}
+\end{figure}
+The units of inductance are Henrys and their units are represented by $[H]$.
+Current in a wire produces a magnetic field so coiling wire increases the magnetic field.
+\begin{mdframed}[backgroundcolor=frameColor,linecolor=borderColor,linewidth=2pt,roundcorner=8pt,align=center]
+\vspace*{5px}
+% {\hspace{-2in}\makebox[2in]{\hfill Definition\hspace{\test}}}%Definition  \hspace{.25in}}
+The relation between the voltage across an inductor with its inductance is as follows.
+\[
+	V = L\frac{\textrm{d}I}{\textrm{d}t}
+\]
+where $\frac{\textrm{d}I}{\textrm{d}t}$ is the derivative of the current with respect to time.
+This is represented by the following schematic.
+\begin{figure}[H]\centering
+\begin{circuitikz}[european voltages]
+	\draw (0,0) to[L=$L$,f=$I(t)$, o-o] (2,0);
+	\draw (0,0) node[below]{$+$} to[open,v_>=$V$,yshift=-.1in] (2,0) node[below]{$-$};
+\end{circuitikz}
+\end{figure}
+Here $I(t)$ is meant to represent that the current through the inductor is a function of time.
+Thus we can differentiate current with respect to time and use it in our formula.
+\end{mdframed}
+We can also combine inductors in series or in parallel.
+An example of a series inductor circuit is shown here.
+\begin{figure}[H]\centering
+\begin{circuitikz}[european voltages]
+	\node at (-.5,0) {\LARGE{$\ldots$}};
+	\draw (0,0) to[L=$L_1$] (2,0);
+	\draw (2,0) to[L=$L_2$,f>_=$I(t)$] (4,0);
+	\draw (4,0) to[L=$L_3$] (6,0);
+	\draw (0,0) node[below]{$+$} to [open,v_>={$V_{total}$},yshift=-.23in] (6,0) node[below]{$-$};
+	\node at (6.5,0) {\LARGE{$\ldots$}};
+\end{circuitikz}
+\end{figure}
+Let's try to find an equivalent inductance for this circuit.
+We first note that voltage drop over all the inductors is simply the sum of all the voltage drops over each inductor.
+\[
+	V_{\textrm{total}} = V_1 + V_2 + V_3
+\]
+The next thing we note is that the current is the same through each of the inductors since they are in series, and thus the derivative of the current with respect to time is the same for all the inductors.
+\[
+	I_1 = I_2 = I_3 \longrightarrow \frac{\textrm{d}I_1}{\textrm{d}t} = \frac{\textrm{d}I_2}{\textrm{d}t} = \frac{\textrm{d}I_3}{\textrm{d}t}
+\]
+This should make physical sense because if any of the rates are different, then at some point in the wire we should be accumulating charge or losing charge.
+With our equations laid out, let's again substitute and simplify.
+\begin{align*}
+	V_{\textrm{total}} &= V_1 + V_2 + V_3 \\
+	&= \left(L_1\frac{\textrm{d}I}{\textrm{d}t}\right) + \left(L_2\frac{\textrm{d}I}{\textrm{d}t}\right) + \left(L_3\frac{\textrm{d}I}{\textrm{d}t}\right) \\
+	&= \frac{\textrm{d}I}{\textrm{d}t} (L_1+L_2+L_3) \\
+	&= \frac{\textrm{d}I}{\textrm{d}t}(L_{\textrm{equivalent}})
+\end{align*}
+where
+\[
+	L_{\textrm{equivalent}} = L_1+L_2+L_3
+\]
+\begin{mdframed}[backgroundcolor=frameColor,linecolor=borderColor,linewidth=2pt,roundcorner=8pt,align=center]
+\vspace*{5px}
+Given a circuit with multiple inductors in series, and thus the same current passing through each and same current derivative, the following two circuits are equivalent.
+\begin{figure}[H]\centering
+\begin{circuitikz}[european voltages]
+	\node at (-.5,0) {\LARGE{$\ldots$}};
+	\draw (0,0) to[L=$L_1$] (2,0);
+	\draw (2,0) to[L=$L_2$] (4,0);
+	\draw (4,0) to[L=$L_3$] (6,0);
+	\node at (6.5,0) {\LARGE{$\ldots$}};
+	\draw (7,0) to[L=$L_n$] (9,0);
+	\node at (9.5,0) {\LARGE{$\ldots$}};
+\end{circuitikz}
+\end{figure}
+\begin{figure}[H]\centering
+\begin{circuitikz}[european voltages]
+	\node at (-.5,0) {\LARGE{$\ldots$}};
+	\draw (0,0) to[L=$L_{\textrm{equivalent}}$] (2,0);
+	\node at (2.5,0) {\LARGE{$\ldots$}};
+\end{circuitikz}
+\end{figure}
+where 
+\[
+	L_{\textrm{equivalent}} = \sum_i L_i
+\]
+\end{mdframed}
+We can also place inductors in a parallel fashion. 
+Inductors that are in parallel share common voltages at both of their nodes and thus have the same voltage drops.
+An example of this kind of circuit is shown here.
+\begin{figure}[H]\centering
+\begin{circuitikz}
+	\draw (0,2) node[left]{$+$} to[short,o-] (2,2);
+	\draw (0,0) node[left]{$-$} to[short,o-] (2,0);
+	\draw (2,0) to[L=$L_1$,i_<=$I_1(t)$] (2,2);
+	\draw (2,2) to[short] (4,2);
+	\draw (2,0) to[short] (4,0);
+	\draw (4,0) to[L=$L_2$,i_<=$I_2(t)$] (4,2);
+	\draw (4,2) to[short] (6,2);
+	\draw (4,0) to[short] (6,0);
+	\draw (6,0) to[L=$L_3$,i_<=$I_3(t)$] (6,2);
+	\draw (6,2) to[short,-o] (8,2);
+	\draw (6,0) to[short,-o] (8,0);
+	\draw (0,0) to[open,v^<=$V$,xshift=-.1in] (0,2);
+	\node at (8,1) {\LARGE{$\ldots$}};
+\end{circuitikz}
+\end{figure}
+Here all the inductors have all their top nodes at the same voltage and all their bottom nodes at the same voltage, thus they are in parallel.
+As a cause of this, all the voltage drops are the same.
+Now the total current flowing from the top wire to the bottom wire is equivalent to the sum of all the current through each resistor. 
+We also recognize that the total derivative of the current from the top wire to the bottom wire is the sum of the current derivatives through each of the inductors.
+\[
+	I_{\textrm{total}} = I_1+I_2+I_3 \longrightarrow \frac{\textrm{d}I_{\textrm{total}}}{\textrm{d}t} = \frac{\textrm{d}I_1}{\textrm{d}t} + \frac{\textrm{d}I_2}{\textrm{d}t} + \frac{\textrm{d}I_3}{\textrm{d}t}
+\]
+With this setup, we can now solve for an equivalent inductance.
+\begin{align*}
+	\frac{\textrm{d}I_{\textrm{total}}}{\textrm{d}t} &= \frac{\textrm{d}I_1}{\textrm{d}t} + \frac{\textrm{d}I_2}{\textrm{d}t} + \frac{\textrm{d}I_3}{\textrm{d}t} \\
+	&= \left(\frac{V}{L_1}\right) + \left(\frac{V}{L_2}\right) + \left(\frac{V}{L_3}\right) \\
+	&= V\left(\frac{1}{L_1}+\frac{1}{L_2}+\frac{1}{L_3}\right) \\
+	&= V\left(\frac{1}{L_{\textrm{equivalent}}}\right)
+\end{align*}
+where
+\[
+	\frac{1}{L_{\textrm{equivalent}}} = \frac{1}{L_1} + \frac{1}{L_2} + \frac{1}{L_3}
+\]
+\begin{mdframed}[backgroundcolor=frameColor,linecolor=borderColor,linewidth=2pt,roundcorner=8pt,align=center]
+\vspace*{5px}
+Given a circuit with inductors in parallel, (i.e. corresponding nodes have same corresponding voltages and thus same voltage drops), then the following two circuits are equivalent.
+\begin{figure}[H]\centering
+\begin{circuitikz}
+	\node at (0,1) {\LARGE{$\ldots$}};
+	\draw (0,2) to[short,o-] (2,2);
+	\draw (0,0) to[short,o-] (2,0);
+	\draw (2,0) to[L=$L_1$] (2,2);
+	\draw (2,2) to[short] (4,2);
+	\draw (2,0) to[short] (4,0);
+	\draw (4,0) to[L=$L_2$] (4,2);
+	\draw (4,2) to[short] (6,2);
+	\draw (4,0) to[short] (6,0);
+	\draw (6,0) to[L=$L_3$] (6,2);
+	\draw (6,2) to[short] (8,2);
+	\draw (6,0) to[short] (8,0);
+	\node at (8,1) {\LARGE{$\ldots$}};
+	\draw (9,2) to[short] (10,2);
+	\draw (9,0) to[short] (10,0);
+	\draw (10,2) to[short,-o] (11,2);
+	\draw (10,0) to[short,-o] (11,0);
+	\draw (10,0) to[L=$L_n$] (10,2);
+	\node at (11,1) {\LARGE{$\ldots$}};
+\end{circuitikz}
+\end{figure}
+\begin{figure}[H]\centering
+\begin{circuitikz}
+	\node at (-.5,1) {\LARGE{$\ldots$}};
+	\draw (0,2) to[short,o-] (2,2);
+	\draw (0,0) to[short,o-] (2,0);
+	\draw (2,0) to[L=$L_{\textrm{equivalent}}$] (2,2);
+	\draw (2,2) to[short,-o] (4,2);
+	\draw (2,0) to[short,-o] (4,0);
+	\node at (4,1) {\LARGE{$\ldots$}};
+\end{circuitikz}
+\end{figure}
+where
+\[
+	\frac{1}{L_{\textrm{equivalent}}} = \mathlarger{{\mathlarger{\sum_i}}}\frac{1}{L_i}
+\]
+\end{mdframed}
 
