@@ -1,0 +1,521 @@
+\subsubsection{Basic Components}
+\stitle{Resistors}
+The resistor is one of the most fundamental building blocks of analog circuits.
+We denote a resistor with resistance $R$ as follows.
+\begin{figure}[H]\centering
+\begin{circuitikz}
+	\draw (0,0) to[R=$R$] (2,0);
+\end{circuitikz}
+\end{figure}
+Resistance has units of Ohms and the SI symbol for its units is $\Omega$.
+When studying resistors, we usually want to relate the voltage across the resistor's terminals to the current passing through it.
+The relationship is described by Ohm's Law.
+\newlength{\test}
+\setlength{\test}{.25in}
+\addtolength{\test}{12pt}
+\begin{mdframed}[backgroundcolor=frameColor,linecolor=borderColor,linewidth=2pt,roundcorner=8pt,align=center]
+\vspace*{5px}
+% {\hspace{-2in}\makebox[2in]{\hfill Definition\hspace{\test}}}%Definition  \hspace{.25in}}
+\textbf{Ohm's Law} relates the voltage $V$ and the current $I$ through a resistor with resistance $R$ by the equation.
+\[
+	V = IR
+\]
+Represented by the following schematic.
+\begin{figure}[H]\centering
+\begin{circuitikz}[european voltages]
+	\draw (0,0) to[R=$R$,f=$I$, o-o] (2,0);
+	\draw (0,0) node[below]{$+$} to[open,v_>=$V$,yshift=-.1in] (2,0) node[below]{$-$};
+\end{circuitikz}
+\end{figure}
+\end{mdframed}
+Voltages has units of volts and its units are represented by $[V]$. 
+Current has units of Amperes and its units are represented by $[A]$.
+
+The next question to ask is what happens when we combine these resistors in different ways.
+When reducing circuits with multiple resistors, we usually think of them as being in series or parallel.
+A circuit with resistors in series is defined as a circuit branch that has the same current. 
+An example of this is shown here.
+\begin{figure}[H]\centering
+\begin{circuitikz}[european voltages]
+	\node at (-.5,0) {\LARGE{$\ldots$}};
+	\draw (0,0) to[R=$R_1$] (2,0);
+	\draw (2,0) to[R=$R_2$,f>_=$I$] (4,0);
+	\draw (4,0) to[R=$R_3$] (6,0);
+	\draw (0,0) node[below]{$+$} to [open,v_>={$V_{total}$},yshift=-.2in] (6,0) node[below]{$-$};
+	\node at (6.5,0) {\LARGE{$\ldots$}};
+\end{circuitikz}
+\end{figure}
+This circuit is in series and thus the same current $I$, passes through each of the resistors. 
+$V_{total}$ is the total voltage drop over all the resistors, which is the sum of all the voltage drops over each resistor.
+\[
+	V_{\textrm{total}} = V_1 + V_2 + V_3
+\]
+where $V_1$ is the voltage drop over resistor 1 and so on.
+But if we recall Ohm's Law, we remember that the voltage drop over each resistor is $V_i = IR_i$.
+So if substitute and simplify we get
+\begin{align*}
+	V_{\textrm{total}} &= V_1 + V_2 + V_3 \\
+	&= (IR_1) + (IR_2) + (IR_3) \\
+	&= I(R_1+R_2+R_3) \\
+	&= I(R_{\textrm{equivalent}})
+\end{align*}
+where $R_{\textrm{equivalent}}$ is the sum of all the resistors.
+\begin{mdframed}[backgroundcolor=frameColor,linecolor=borderColor,linewidth=2pt,roundcorner=8pt,align=center]
+\vspace*{5px}
+Given a circuit with multiple resistors in series, and thus the same current passing through each, the following two circuits are equivalent.
+\begin{figure}[H]\centering
+\begin{circuitikz}[european voltages]
+	\node at (-.5,0) {\LARGE{$\ldots$}};
+	\draw (0,0) to[R=$R_1$] (2,0);
+	\draw (2,0) to[R=$R_2$] (4,0);
+	\draw (4,0) to[R=$R_3$] (6,0);
+	\node at (6.5,0) {\LARGE{$\ldots$}};
+	\draw (7,0) to[R=$R_n$] (9,0);
+	\node at (9.5,0) {\LARGE{$\ldots$}};
+\end{circuitikz}
+\end{figure}
+\begin{figure}[H]\centering
+\begin{circuitikz}[european voltages]
+	\node at (-.5,0) {\LARGE{$\ldots$}};
+	\draw (0,0) to[R=$R_{\textrm{equivalent}}$] (2,0);
+	\node at (2.5,0) {\LARGE{$\ldots$}};
+\end{circuitikz}
+\end{figure}
+where 
+\[
+	R_{\textrm{equivalent}} = \sum_i R_i
+\]
+\end{mdframed}
+Another configuration that resistors can be in is in parallel. 
+Resistors that are in parallel share common voltages at both of their nodes and thus have the same voltage drops.
+An example of this kind of circuit is shown here.
+\begin{figure}[H]\centering
+\begin{circuitikz}
+	\draw (0,2) node[left]{$+$} to[short,o-] (2,2);
+	\draw (0,0) node[left]{$-$} to[short,o-] (2,0);
+	\draw (2,0) to[R=$R_1$,i_<=$I_1$] (2,2);
+	\draw (2,2) to[short] (4,2);
+	\draw (2,0) to[short] (4,0);
+	\draw (4,0) to[R=$R_2$,i_<=$I_2$] (4,2);
+	\draw (4,2) to[short] (6,2);
+	\draw (4,0) to[short] (6,0);
+	\draw (6,0) to[R=$R_3$,i_<=$I_3$] (6,2);
+	\draw (6,2) to[short,-o] (8,2);
+	\draw (6,0) to[short,-o] (8,0);
+	\draw (0,0) to[open,v^<=$V$,xshift=-.1in] (0,2);
+	\node at (8,1) {\LARGE{$\ldots$}};
+\end{circuitikz}
+\end{figure}
+Here all the resistors have all their top nodes at the same voltage and all their bottom nodes at the same voltage, thus they are in parallel.
+As a cause of this, all the voltage drops are the same.
+Now the total current flowing from the top wire to the bottom wire is equivalent to the sum of all the current through each resistor. 
+\begin{gather*}
+	I_{\textrm{total}} = I_1 + I_2 + I_3 \\
+	\textrm{where,} \quad I_i = \frac{V}{R_i}
+\end{gather*}
+So now lets substitute and simplify.
+\begin{align*}
+	I_{\textrm{total}} &= I_1 + I_2 + I_3 \\
+	&= \left(\frac{V}{R_1}\right)+\left(\frac{V}{R_2}\right)+\left(\frac{V}{R_3}\right) \\
+	&= V\left(\frac{1}{R_1}+\frac{1}{R_2}+\frac{1}{R_3}\right) \\
+	&= V\left(\frac{1}{R_{\textrm{equivalent}}}\right)
+\end{align*}
+where 
+\[
+	\frac{1}{R_{\textrm{equivalent}}} = \frac{1}{R_1}+\frac{1}{R_2}+\frac{1}{R_3}
+\]
+\begin{mdframed}[backgroundcolor=frameColor,linecolor=borderColor,linewidth=2pt,roundcorner=8pt,align=center]
+\vspace*{5px}
+Given a circuit with resistors in parallel, (i.e. corresponding nodes have same corresponding voltages and thus same voltage drops), then the following two circuits are equivalent.
+\begin{figure}[H]\centering
+\begin{circuitikz}
+	\node at (0,1) {\LARGE{$\ldots$}};
+	\draw (0,2) to[short,o-] (2,2);
+	\draw (0,0) to[short,o-] (2,0);
+	\draw (2,0) to[R=$R_1$] (2,2);
+	\draw (2,2) to[short] (4,2);
+	\draw (2,0) to[short] (4,0);
+	\draw (4,0) to[R=$R_2$] (4,2);
+	\draw (4,2) to[short] (6,2);
+	\draw (4,0) to[short] (6,0);
+	\draw (6,0) to[R=$R_3$] (6,2);
+	\draw (6,2) to[short] (8,2);
+	\draw (6,0) to[short] (8,0);
+	\node at (8,1) {\LARGE{$\ldots$}};
+	\draw (9,2) to[short] (10,2);
+	\draw (9,0) to[short] (10,0);
+	\draw (10,2) to[short,-o] (11,2);
+	\draw (10,0) to[short,-o] (11,0);
+	\draw (10,0) to[R=$R_n$] (10,2);
+	\node at (11,1) {\LARGE{$\ldots$}};
+\end{circuitikz}
+\end{figure}
+\begin{figure}[H]\centering
+\begin{circuitikz}
+	\node at (-.5,1) {\LARGE{$\ldots$}};
+	\draw (0,2) to[short,o-] (2,2);
+	\draw (0,0) to[short,o-] (2,0);
+	\draw (2,0) to[R=$R_{\textrm{equivalent}}$] (2,2);
+	\draw (2,2) to[short,-o] (4,2);
+	\draw (2,0) to[short,-o] (4,0);
+	\node at (4,1) {\LARGE{$\ldots$}};
+\end{circuitikz}
+\end{figure}
+where
+\[
+	\frac{1}{R_{\textrm{equivalent}}} = \mathlarger{{\mathlarger{\sum_i}}}\frac{1}{R_i}
+\]
+\end{mdframed}
+
+%%%%%%%%%%%%%%%% Capacitors %%%%%%%%%%%%%%%%
+\newpage
+\stitle{Capacitors}
+A capacitor is typically a set of parallel plates that are separated by some insulating material such as air.
+We denote a capacitor with capacitance $C$ as follows.
+\begin{figure}[H]\centering
+\begin{circuitikz}
+	\draw (0,0) to[C=$C$] (2,0);
+\end{circuitikz}
+\end{figure}
+Capacitance is measured in units of Farads and its units are represented by $[F]$.
+Capacitors work by storing some positive charge on one of the plates and negative charge on the opposite plate.
+This causes an electric field between the plates and this is where the capacitor stores its energy.
+We relate the capacitor's capacitance with its voltage as follows.
+\begin{mdframed}[backgroundcolor=frameColor,linecolor=borderColor,linewidth=2pt,roundcorner=8pt,align=center]
+\vspace*{5px}
+Given the following capacitor with capacitance $C$ and charge $Q$ on one of the plates
+\begin{figure}[H]\centering
+\begin{circuitikz}[european voltages]
+	\draw 
+		(0,0) to node[above,pos=1,]{$+Q$} (.5,0)
+		to [C=$C$] (1.5,0) to node[above,pos=0]{$-Q$} (2,0)
+		% (0,0) to [open,v_>=\raisebox{-.2in}{$V$},o-o] (2,0);
+		(0,0) to [open,v_>={$V$},yshift=-.1in] (2,0);
+	\draw (0,0) node[below]{$+$} to [open,o-o] (2,0) node[below]{$-$};
+\end{circuitikz}
+\end{figure}
+we relate the voltage $V$ across the capacitor with the equation.
+\[
+	V = \frac{Q}{C}
+\]
+\end{mdframed}
+Charge has units of Coulombs and its units are represented as $[C]$ usually.
+Similar to resistors, we can combine capacitors in series and parallel. 
+An example circuit with capacitors in series.
+\begin{figure}[H]\centering
+\begin{circuitikz}[european voltages]
+	\draw (0,0) to [C=$C_1$] (2,0);
+	\draw (2,0) to [C=$C_2$] (4,0);
+	\draw (4,0) to [C=$C_3$] (6,0);
+	\node at (6.5,0) {\LARGE{$\ldots$}};
+	\node at (-.5,0) {\LARGE{$\ldots$}};
+	\node at (.5,0)[above]{$+Q$};
+	\node at (2.5,0)[above]{$+Q$};
+	\node at (4.5,0)[above]{$+Q$};
+	\node at (1.5,0)[above]{$-Q$};
+	\node at (3.5,0)[above]{$-Q$};
+	\node at (5.5,0)[above]{$-Q$};
+	\draw (0,0) node[below]{$+$} to [open,o-o] (6,0) node[below]{$-$};
+	\draw (0,0) to [open,v_>={$V_{\textrm{total}}$},yshift=-.2in] (6,0);
+\end{circuitikz}
+\end{figure}
+Here the important thing to recognize is that the charge on each of the capacitors is the same.
+If the charge was different between two capacitors, then there would be a voltage difference and current would flow to equalize voltages until all capacitors have the same charge.
+With that in mind lets try solving this circuit and find an equivalent single capacitor to represent it.
+The total voltage drop over all three capacitors is simply the sum of each individual capacitor's voltage drop.
+\[
+	V_{\textrm{total}} = V_1 + V_2 + V_3
+\]
+But we know how to represent the voltage drop of a capacitor. Therefore we have.
+\begin{align*}
+	V_{\textrm{total}} &= V_1 + V_2 + V_3 \\
+	&= \left(\frac{Q}{C_1}\right)+\left(\frac{Q}{C_2}\right)+\left(\frac{Q}{C_3}\right) \\
+	&= Q\left(\frac{1}{C_1}+\frac{1}{C_2}+\frac{1}{C_3}\right) \\
+	&= Q\left(\frac{1}{C_{\textrm{equivalent}}}\right)
+\end{align*}
+where 
+\[
+	\frac{1}{C_{\textrm{equivalent}}} = \frac{1}{C_1}+\frac{1}{C_2}+\frac{1}{C_3}
+\]
+\begin{mdframed}[backgroundcolor=frameColor,linecolor=borderColor,linewidth=2pt,roundcorner=8pt,align=center]
+\vspace*{5px}
+For a circuit with multiple capacitors in series, and thus the same charge on each capacitor, then the following two circuits are equivalent.
+\begin{figure}[H]\centering
+\begin{circuitikz}[european voltages]
+	\draw (0,0) to [C=$C_1$] (2,0);
+	\draw (2,0) to [C=$C_2$] (4,0);
+	\draw (4,0) to [C=$C_3$] (6,0);
+	\node at (6.5,0) {\LARGE{$\ldots$}};
+	\node at (-.5,0) {\LARGE{$\ldots$}};
+	\draw (7,0) to [C=$C_n$] (9,0);
+	\node at (9.5,0) {\LARGE{$\ldots$}};
+\end{circuitikz}
+\end{figure}
+\begin{figure}[H]\centering
+\begin{circuitikz}[european voltages]
+	\node at (-.5,0) {\LARGE{$\ldots$}};
+	\draw (0,0) to [C=$C_{\textrm{equivalent}}$] (2,0);
+	\node at (2.5,0) {\LARGE{$\ldots$}};
+\end{circuitikz}
+\end{figure}
+where
+\[
+	\frac{1}{C_{\textrm{equivalent}}} = \mathlarger{{\mathlarger{\sum_i}}} \frac{1}{C_i}
+\]
+\end{mdframed}
+Capacitors can also be combined in a parallel fashion too.
+Here is an example circuit with capacitors in parallel.
+\begin{figure}[H]\centering
+\begin{circuitikz}
+	\draw (0,2) node[left]{$+$} to[short,o-] (2,2);
+	\draw (0,0) node[left]{$-$} to[short,o-] (2,0);
+	\draw (2,0) to[C=$C_1$] (2,2);
+	\draw (2,2) to[short] (4,2);
+	\draw (2,0) to[short] (4,0);
+	\draw (4,0) to[C=$C_2$] (4,2);
+	\draw (4,2) to[short] (6,2);
+	\draw (4,0) to[short] (6,0);
+	\draw (6,0) to[C=$C_3$] (6,2);
+	\draw (6,2) to[short,-o] (8,2);
+	\draw (6,0) to[short,-o] (8,0);
+	\draw (0,0) to[open,v^<=$V$,xshift=-.1in] (0,2);
+	\node at (8,1) {\LARGE{$\ldots$}};
+	\node at (2,1.5)[right,xshift=-.05in]{$+Q_1$};
+	\node at (2,.5)[right,xshift=-.05in]{$-Q_1$};
+	\node at (4,1.5)[right,xshift=-.05in]{$+Q_2$};
+	\node at (4,.5)[right,xshift=-.05in]{$-Q_2$};
+	\node at (6,1.5)[right,xshift=-.05in]{$+Q_3$};
+	\node at (6,.5)[right,xshift=-.05in]{$-Q_3$};
+\end{circuitikz}
+\end{figure}
+Again, to reinforce the idea, all the top nodes of the capacitors are at a common voltage and all the bottom ones are at a common voltage.
+Thus the voltage drop over each capacitor is the same.
+Now lets find an equivalent capacitor to represent this circuit.
+The total charge of all the capacitors is.
+\[
+	Q_{\textrm{total}} = Q_1 + Q_2 + Q_3
+\]
+Using our expression that relates charge and capacitance for capacitors we can substitute and simplify.
+\begin{align*}
+	Q_{\textrm{total}} &= Q_1 + Q_2 + Q_3 \\
+	&= (VC_1) + (VC_2) + (VC_3) \\
+	&= V(C_1+C_2+C_3) \\
+	&= V(C_{\textrm{equivalent}})
+\end{align*}
+where
+\[
+	C_{\textrm{equivalent}} = C_1+C_2+C_3
+\]
+\begin{mdframed}[backgroundcolor=frameColor,linecolor=borderColor,linewidth=2pt,roundcorner=8pt,align=center]
+\vspace*{5px}
+Given a circuit with capacitors in parallel, (i.e. corresponding nodes have same corresponding voltages and thus same voltage drops), then the following two circuits are equivalent.
+\begin{figure}[H]\centering
+\begin{circuitikz}
+	\node at (0,1) {\LARGE{$\ldots$}};
+	\draw (0,2) to[short,o-] (2,2);
+	\draw (0,0) to[short,o-] (2,0);
+	\draw (2,0) to[C=$C_1$] (2,2);
+	\draw (2,2) to[short] (4,2);
+	\draw (2,0) to[short] (4,0);
+	\draw (4,0) to[C=$C_2$] (4,2);
+	\draw (4,2) to[short] (6,2);
+	\draw (4,0) to[short] (6,0);
+	\draw (6,0) to[C=$C_3$] (6,2);
+	\draw (6,2) to[short] (8,2);
+	\draw (6,0) to[short] (8,0);
+	\node at (8,1) {\LARGE{$\ldots$}};
+	\draw (9,2) to[short] (10,2);
+	\draw (9,0) to[short] (10,0);
+	\draw (10,2) to[short,-o] (11,2);
+	\draw (10,0) to[short,-o] (11,0);
+	\draw (10,0) to[C=$C_n$] (10,2);
+	\node at (11,1) {\LARGE{$\ldots$}};
+\end{circuitikz}
+\end{figure}
+\begin{figure}[H]\centering
+\begin{circuitikz}
+	\node at (-.5,1) {\LARGE{$\ldots$}};
+	\draw (0,2) to[short,o-] (2,2);
+	\draw (0,0) to[short,o-] (2,0);
+	\draw (2,0) to[C=$C_{\textrm{equivalent}}$] (2,2);
+	\draw (2,2) to[short,-o] (4,2);
+	\draw (2,0) to[short,-o] (4,0);
+	\node at (4,1) {\LARGE{$\ldots$}};
+\end{circuitikz}
+\end{figure}
+where
+\[
+	C_{\textrm{equivalent}} = \mathlarger{{\mathlarger{\sum_i}}}C_i
+\]
+\end{mdframed}
+
+%%%%%%%%%%%%%%%% Inductors %%%%%%%%%%%%%%%%
+\newpage
+\stitle{Inductors}
+The last of the basic components we must talk about is the inductor.
+Inductors are coils of metal that produce magnetic fields when current flows through them.
+We denote an inductor with inductance $L$ as follows.
+\begin{figure}[H]\centering
+\begin{circuitikz}
+	\draw (0,0) to[L=$L$] (2,0);
+\end{circuitikz}
+\end{figure}
+The units of inductance are Henrys and their units are represented by $[H]$.
+Current in a wire produces a magnetic field so coiling wire increases the magnetic field.
+\begin{mdframed}[backgroundcolor=frameColor,linecolor=borderColor,linewidth=2pt,roundcorner=8pt,align=center]
+\vspace*{5px}
+% {\hspace{-2in}\makebox[2in]{\hfill Definition\hspace{\test}}}%Definition  \hspace{.25in}}
+The relation between the voltage across an inductor with its inductance is as follows.
+\[
+	V = L\frac{\textrm{d}I}{\textrm{d}t}
+\]
+where $\frac{\textrm{d}I}{\textrm{d}t}$ is the derivative of the current with respect to time.
+This is represented by the following schematic.
+\begin{figure}[H]\centering
+\begin{circuitikz}[european voltages]
+	\draw (0,0) to[L=$L$,f=$I(t)$, o-o] (2,0);
+	\draw (0,0) node[below]{$+$} to[open,v_>=$V$,yshift=-.1in] (2,0) node[below]{$-$};
+\end{circuitikz}
+\end{figure}
+Here $I(t)$ is meant to represent that the current through the inductor is a function of time.
+Thus we can differentiate current with respect to time and use it in our formula.
+\end{mdframed}
+We can also combine inductors in series or in parallel.
+An example of a series inductor circuit is shown here.
+\begin{figure}[H]\centering
+\begin{circuitikz}[european voltages]
+	\node at (-.5,0) {\LARGE{$\ldots$}};
+	\draw (0,0) to[L=$L_1$] (2,0);
+	\draw (2,0) to[L=$L_2$,f>_=$I(t)$] (4,0);
+	\draw (4,0) to[L=$L_3$] (6,0);
+	\draw (0,0) node[below]{$+$} to [open,v_>={$V_{total}$},yshift=-.23in] (6,0) node[below]{$-$};
+	\node at (6.5,0) {\LARGE{$\ldots$}};
+\end{circuitikz}
+\end{figure}
+Let's try to find an equivalent inductance for this circuit.
+We first note that voltage drop over all the inductors is simply the sum of all the voltage drops over each inductor.
+\[
+	V_{\textrm{total}} = V_1 + V_2 + V_3
+\]
+The next thing we note is that the current is the same through each of the inductors since they are in series, and thus the derivative of the current with respect to time is the same for all the inductors.
+\[
+	I_1 = I_2 = I_3 \longrightarrow \frac{\textrm{d}I_1}{\textrm{d}t} = \frac{\textrm{d}I_2}{\textrm{d}t} = \frac{\textrm{d}I_3}{\textrm{d}t}
+\]
+This should make physical sense because if any of the rates are different, then at some point in the wire we should be accumulating charge or losing charge.
+With our equations laid out, let's again substitute and simplify.
+\begin{align*}
+	V_{\textrm{total}} &= V_1 + V_2 + V_3 \\
+	&= \left(L_1\frac{\textrm{d}I}{\textrm{d}t}\right) + \left(L_2\frac{\textrm{d}I}{\textrm{d}t}\right) + \left(L_3\frac{\textrm{d}I}{\textrm{d}t}\right) \\
+	&= \frac{\textrm{d}I}{\textrm{d}t} (L_1+L_2+L_3) \\
+	&= \frac{\textrm{d}I}{\textrm{d}t}(L_{\textrm{equivalent}})
+\end{align*}
+where
+\[
+	L_{\textrm{equivalent}} = L_1+L_2+L_3
+\]
+\begin{mdframed}[backgroundcolor=frameColor,linecolor=borderColor,linewidth=2pt,roundcorner=8pt,align=center]
+\vspace*{5px}
+Given a circuit with multiple inductors in series, and thus the same current passing through each and same current derivative, the following two circuits are equivalent.
+\begin{figure}[H]\centering
+\begin{circuitikz}[european voltages]
+	\node at (-.5,0) {\LARGE{$\ldots$}};
+	\draw (0,0) to[L=$L_1$] (2,0);
+	\draw (2,0) to[L=$L_2$] (4,0);
+	\draw (4,0) to[L=$L_3$] (6,0);
+	\node at (6.5,0) {\LARGE{$\ldots$}};
+	\draw (7,0) to[L=$L_n$] (9,0);
+	\node at (9.5,0) {\LARGE{$\ldots$}};
+\end{circuitikz}
+\end{figure}
+\begin{figure}[H]\centering
+\begin{circuitikz}[european voltages]
+	\node at (-.5,0) {\LARGE{$\ldots$}};
+	\draw (0,0) to[L=$L_{\textrm{equivalent}}$] (2,0);
+	\node at (2.5,0) {\LARGE{$\ldots$}};
+\end{circuitikz}
+\end{figure}
+where 
+\[
+	L_{\textrm{equivalent}} = \sum_i L_i
+\]
+\end{mdframed}
+We can also place inductors in a parallel fashion. 
+Inductors that are in parallel share common voltages at both of their nodes and thus have the same voltage drops.
+An example of this kind of circuit is shown here.
+\begin{figure}[H]\centering
+\begin{circuitikz}
+	\draw (0,2) node[left]{$+$} to[short,o-] (2,2);
+	\draw (0,0) node[left]{$-$} to[short,o-] (2,0);
+	\draw (2,0) to[L=$L_1$,i_<=$I_1(t)$] (2,2);
+	\draw (2,2) to[short] (4,2);
+	\draw (2,0) to[short] (4,0);
+	\draw (4,0) to[L=$L_2$,i_<=$I_2(t)$] (4,2);
+	\draw (4,2) to[short] (6,2);
+	\draw (4,0) to[short] (6,0);
+	\draw (6,0) to[L=$L_3$,i_<=$I_3(t)$] (6,2);
+	\draw (6,2) to[short,-o] (8,2);
+	\draw (6,0) to[short,-o] (8,0);
+	\draw (0,0) to[open,v^<=$V$,xshift=-.1in] (0,2);
+	\node at (8,1) {\LARGE{$\ldots$}};
+\end{circuitikz}
+\end{figure}
+Here all the inductors have all their top nodes at the same voltage and all their bottom nodes at the same voltage, thus they are in parallel.
+As a cause of this, all the voltage drops are the same.
+Now the total current flowing from the top wire to the bottom wire is equivalent to the sum of all the current through each resistor. 
+We also recognize that the total derivative of the current from the top wire to the bottom wire is the sum of the current derivatives through each of the inductors.
+\[
+	I_{\textrm{total}} = I_1+I_2+I_3 \longrightarrow \frac{\textrm{d}I_{\textrm{total}}}{\textrm{d}t} = \frac{\textrm{d}I_1}{\textrm{d}t} + \frac{\textrm{d}I_2}{\textrm{d}t} + \frac{\textrm{d}I_3}{\textrm{d}t}
+\]
+With this setup, we can now solve for an equivalent inductance.
+\begin{align*}
+	\frac{\textrm{d}I_{\textrm{total}}}{\textrm{d}t} &= \frac{\textrm{d}I_1}{\textrm{d}t} + \frac{\textrm{d}I_2}{\textrm{d}t} + \frac{\textrm{d}I_3}{\textrm{d}t} \\
+	&= \left(\frac{V}{L_1}\right) + \left(\frac{V}{L_2}\right) + \left(\frac{V}{L_3}\right) \\
+	&= V\left(\frac{1}{L_1}+\frac{1}{L_2}+\frac{1}{L_3}\right) \\
+	&= V\left(\frac{1}{L_{\textrm{equivalent}}}\right)
+\end{align*}
+where
+\[
+	\frac{1}{L_{\textrm{equivalent}}} = \frac{1}{L_1} + \frac{1}{L_2} + \frac{1}{L_3}
+\]
+\begin{mdframed}[backgroundcolor=frameColor,linecolor=borderColor,linewidth=2pt,roundcorner=8pt,align=center]
+\vspace*{5px}
+Given a circuit with inductors in parallel, (i.e. corresponding nodes have same corresponding voltages and thus same voltage drops), then the following two circuits are equivalent.
+\begin{figure}[H]\centering
+\begin{circuitikz}
+	\node at (0,1) {\LARGE{$\ldots$}};
+	\draw (0,2) to[short,o-] (2,2);
+	\draw (0,0) to[short,o-] (2,0);
+	\draw (2,0) to[L=$L_1$] (2,2);
+	\draw (2,2) to[short] (4,2);
+	\draw (2,0) to[short] (4,0);
+	\draw (4,0) to[L=$L_2$] (4,2);
+	\draw (4,2) to[short] (6,2);
+	\draw (4,0) to[short] (6,0);
+	\draw (6,0) to[L=$L_3$] (6,2);
+	\draw (6,2) to[short] (8,2);
+	\draw (6,0) to[short] (8,0);
+	\node at (8,1) {\LARGE{$\ldots$}};
+	\draw (9,2) to[short] (10,2);
+	\draw (9,0) to[short] (10,0);
+	\draw (10,2) to[short,-o] (11,2);
+	\draw (10,0) to[short,-o] (11,0);
+	\draw (10,0) to[L=$L_n$] (10,2);
+	\node at (11,1) {\LARGE{$\ldots$}};
+\end{circuitikz}
+\end{figure}
+\begin{figure}[H]\centering
+\begin{circuitikz}
+	\node at (-.5,1) {\LARGE{$\ldots$}};
+	\draw (0,2) to[short,o-] (2,2);
+	\draw (0,0) to[short,o-] (2,0);
+	\draw (2,0) to[L=$L_{\textrm{equivalent}}$] (2,2);
+	\draw (2,2) to[short,-o] (4,2);
+	\draw (2,0) to[short,-o] (4,0);
+	\node at (4,1) {\LARGE{$\ldots$}};
+\end{circuitikz}
+\end{figure}
+where
+\[
+	\frac{1}{L_{\textrm{equivalent}}} = \mathlarger{{\mathlarger{\sum_i}}}\frac{1}{L_i}
+\]
+\end{mdframed}
