@@ -10,12 +10,7 @@ We denote a resistor with resistance $R$ as follows.
 Resistance has units of Ohms and the SI symbol for its units is $\Omega$.
 When studying resistors, we usually want to relate the voltage across the resistor's terminals to the current passing through it.
 The relationship is described by Ohm's Law.
-\newlength{\test}
-\setlength{\test}{.25in}
-\addtolength{\test}{12pt}
-\begin{mdframed}[backgroundcolor=frameColor,linecolor=borderColor,linewidth=2pt,roundcorner=8pt,align=center]
-\vspace*{5px}
-% {\hspace{-2in}\makebox[2in]{\hfill Definition\hspace{\test}}}%Definition  \hspace{.25in}}
+\begin{circd}
 \textbf{Ohm's Law} relates the voltage $V$ and the current $I$ through a resistor with resistance $R$ by the equation.
 \[
 	V = IR
@@ -27,7 +22,7 @@ Represented by the following schematic.
 	\draw (0,0) node[below]{$+$} to[open,v_>=$V$,yshift=-.1in] (2,0) node[below]{$-$};
 \end{circuitikz}
 \end{figure}
-\end{mdframed}
+\end{circd}
 Voltages has units of volts and its units are represented by $[V]$. 
 Current has units of Amperes and its units are represented by $[A]$.
 
@@ -60,8 +55,7 @@ So if substitute and simplify we get
 	&= I(R_{\textrm{equivalent}})
 \end{align*}
 where $R_{\textrm{equivalent}}$ is the sum of all the resistors.
-\begin{mdframed}[backgroundcolor=frameColor,linecolor=borderColor,linewidth=2pt,roundcorner=8pt,align=center]
-\vspace*{5px}
+\begin{circd}
 Given a circuit with multiple resistors in series, and thus the same current passing through each, the following two circuits are equivalent.
 \begin{figure}[H]\centering
 \begin{circuitikz}[european voltages]
@@ -85,7 +79,7 @@ where
 \[
 	R_{\textrm{equivalent}} = \sum_i R_i
 \]
-\end{mdframed}
+\end{circd}
 Another configuration that resistors can be in is in parallel. 
 Resistors that are in parallel share common voltages at both of their nodes and thus have the same voltage drops.
 An example of this kind of circuit is shown here.
@@ -124,8 +118,7 @@ where
 \[
 	\frac{1}{R_{\textrm{equivalent}}} = \frac{1}{R_1}+\frac{1}{R_2}+\frac{1}{R_3}
 \]
-\begin{mdframed}[backgroundcolor=frameColor,linecolor=borderColor,linewidth=2pt,roundcorner=8pt,align=center]
-\vspace*{5px}
+\begin{circd}
 Given a circuit with resistors in parallel, (i.e. corresponding nodes have same corresponding voltages and thus same voltage drops), then the following two circuits are equivalent.
 \begin{figure}[H]\centering
 \begin{circuitikz}
@@ -165,7 +158,7 @@ where
 \[
 	\frac{1}{R_{\textrm{equivalent}}} = \mathlarger{{\mathlarger{\sum_i}}}\frac{1}{R_i}
 \]
-\end{mdframed}
+\end{circd}
 
 %%%%%%%%%%%%%%%% Capacitors %%%%%%%%%%%%%%%%
 \newpage
@@ -181,8 +174,7 @@ Capacitance is measured in units of Farads and its units are represented by $[F]
 Capacitors work by storing some positive charge on one of the plates and negative charge on the opposite plate.
 This causes an electric field between the plates and this is where the capacitor stores its energy.
 We relate the capacitor's capacitance with its voltage as follows.
-\begin{mdframed}[backgroundcolor=frameColor,linecolor=borderColor,linewidth=2pt,roundcorner=8pt,align=center]
-\vspace*{5px}
+\begin{circd}
 Given the following capacitor with capacitance $C$ and charge $Q$ on one of the plates
 \begin{figure}[H]\centering
 \begin{circuitikz}[european voltages]
@@ -198,7 +190,7 @@ we relate the voltage $V$ across the capacitor with the equation.
 \[
 	V = \frac{Q}{C}
 \]
-\end{mdframed}
+\end{circd}
 Charge has units of Coulombs and its units are represented as $[C]$ usually.
 Similar to resistors, we can combine capacitors in series and parallel. 
 An example circuit with capacitors in series.
@@ -237,8 +229,7 @@ where
 \[
 	\frac{1}{C_{\textrm{equivalent}}} = \frac{1}{C_1}+\frac{1}{C_2}+\frac{1}{C_3}
 \]
-\begin{mdframed}[backgroundcolor=frameColor,linecolor=borderColor,linewidth=2pt,roundcorner=8pt,align=center]
-\vspace*{5px}
+\begin{circd}
 For a circuit with multiple capacitors in series, and thus the same charge on each capacitor, then the following two circuits are equivalent.
 \begin{figure}[H]\centering
 \begin{circuitikz}[european voltages]
@@ -262,7 +253,7 @@ where
 \[
 	\frac{1}{C_{\textrm{equivalent}}} = \mathlarger{{\mathlarger{\sum_i}}} \frac{1}{C_i}
 \]
-\end{mdframed}
+\end{circd}
 Capacitors can also be combined in a parallel fashion too.
 Here is an example circuit with capacitors in parallel.
 \begin{figure}[H]\centering
@@ -306,8 +297,7 @@ where
 \[
 	C_{\textrm{equivalent}} = C_1+C_2+C_3
 \]
-\begin{mdframed}[backgroundcolor=frameColor,linecolor=borderColor,linewidth=2pt,roundcorner=8pt,align=center]
-\vspace*{5px}
+\begin{circd}
 Given a circuit with capacitors in parallel, (i.e. corresponding nodes have same corresponding voltages and thus same voltage drops), then the following two circuits are equivalent.
 \begin{figure}[H]\centering
 \begin{circuitikz}
@@ -347,7 +337,7 @@ where
 \[
 	C_{\textrm{equivalent}} = \mathlarger{{\mathlarger{\sum_i}}}C_i
 \]
-\end{mdframed}
+\end{circd}
 
 %%%%%%%%%%%%%%%% Inductors %%%%%%%%%%%%%%%%
 \newpage
@@ -362,9 +352,7 @@ We denote an inductor with inductance $L$ as follows.
 \end{figure}
 The units of inductance are Henrys and their units are represented by $[H]$.
 Current in a wire produces a magnetic field so coiling wire increases the magnetic field.
-\begin{mdframed}[backgroundcolor=frameColor,linecolor=borderColor,linewidth=2pt,roundcorner=8pt,align=center]
-\vspace*{5px}
-% {\hspace{-2in}\makebox[2in]{\hfill Definition\hspace{\test}}}%Definition  \hspace{.25in}}
+\begin{circd}
 The relation between the voltage across an inductor with its inductance is as follows.
 \[
 	V = L\frac{\textrm{d}I}{\textrm{d}t}
@@ -379,7 +367,7 @@ This is represented by the following schematic.
 \end{figure}
 Here $I(t)$ is meant to represent that the current through the inductor is a function of time.
 Thus we can differentiate current with respect to time and use it in our formula.
-\end{mdframed}
+\end{circd}
 We can also combine inductors in series or in parallel.
 An example of a series inductor circuit is shown here.
 \begin{figure}[H]\centering
@@ -413,8 +401,7 @@ where
 \[
 	L_{\textrm{equivalent}} = L_1+L_2+L_3
 \]
-\begin{mdframed}[backgroundcolor=frameColor,linecolor=borderColor,linewidth=2pt,roundcorner=8pt,align=center]
-\vspace*{5px}
+\begin{circd}
 Given a circuit with multiple inductors in series, and thus the same current passing through each and same current derivative, the following two circuits are equivalent.
 \begin{figure}[H]\centering
 \begin{circuitikz}[european voltages]
@@ -438,7 +425,7 @@ where
 \[
 	L_{\textrm{equivalent}} = \sum_i L_i
 \]
-\end{mdframed}
+\end{circd}
 We can also place inductors in a parallel fashion. 
 Inductors that are in parallel share common voltages at both of their nodes and thus have the same voltage drops.
 An example of this kind of circuit is shown here.
@@ -477,8 +464,7 @@ where
 \[
 	\frac{1}{L_{\textrm{equivalent}}} = \frac{1}{L_1} + \frac{1}{L_2} + \frac{1}{L_3}
 \]
-\begin{mdframed}[backgroundcolor=frameColor,linecolor=borderColor,linewidth=2pt,roundcorner=8pt,align=center]
-\vspace*{5px}
+\begin{circd}
 Given a circuit with inductors in parallel, (i.e. corresponding nodes have same corresponding voltages and thus same voltage drops), then the following two circuits are equivalent.
 \begin{figure}[H]\centering
 \begin{circuitikz}
@@ -518,4 +504,4 @@ where
 \[
 	\frac{1}{L_{\textrm{equivalent}}} = \mathlarger{{\mathlarger{\sum_i}}}\frac{1}{L_i}
 \]
-\end{mdframed}
+\end{circd}
